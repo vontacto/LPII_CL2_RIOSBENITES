@@ -10,3 +10,6 @@
 1739077443345	Delete element
 1739078978067	Delete element
 1739078980503	Delete element
+1739082558798	Move 'FrmRegistrarProveedor.jsp' to 'webapp'
+1739082560307	Move 'FrmActualizarProveedor.jsp' to 'webapp'
+1739082562177	Move 'MenuPrincipal.jsp' to 'webapp'

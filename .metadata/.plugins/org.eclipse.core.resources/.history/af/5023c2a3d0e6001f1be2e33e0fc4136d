@@ -1,0 +1,145 @@
+package Controlador;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import DaoImp.ClassProveedorImp;
+import model.TblProveedorcl2;
+
+/**
+ * Servlet implementation class ControladorProveedor
+ */
+public class ControladorProveedor extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public ControladorProveedor() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// instanciamos la respectiva clase...
+		ClassProveedorImp crudimp = new ClassProveedorImp();
+		TblProveedorcl2 tblprov = new TblProveedorcl2();
+		// recuperamos el listado de proveedores de la BD..
+		List<TblProveedorcl2> listadoproveedores = crudimp.ListadoProveedor();
+		// enviamos hacia la vista...
+		// almacenamos en el respectivo metodo...
+		request.setAttribute("listado", listadoproveedores);
+
+		// declaramos una variable de tipo string...
+		// recibimos el valor segun la accion..
+		String accion = request.getParameter("accion");
+		// aplicamos una condicion...
+		if (accion != null) {
+			// aplicamos un switch..
+			switch (accion) {
+			case "Modificar":
+				// obtenemos el id
+				int idprov = Integer.parseInt(request.getParameter("id"));
+				// asignamos el id
+				tblprov.setIdproveedorcl2(idprov);
+				// buscamos el codigo a actualizar...
+				TblProveedorcl2 prov = crudimp.BuscarProveedor(tblprov);
+				SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+				// asignamos los valores
+				// para enviarlos hacia al formulario actualizar
+				request.setAttribute("idprov", prov.getIdproveedorcl2());
+				request.setAttribute("nomprov", prov.getNomproveecl2());
+				request.setAttribute("rucprov", prov.getRucproveecl2());
+				request.setAttribute("rsocialprov", prov.getRsocialproveecl2());
+				request.setAttribute("emailprov", prov.getEmailproveecl2());
+				request.setAttribute("fecha", format.format(prov.getFeingproveecl2()));
+				// redireccionamos
+				request.getRequestDispatcher("/FrmActualizarProveedor.jsp").forward(request, response);
+				// salimos
+				break;
+			case "Registrar":
+				// redireccionamos hacia la vista(.jsp)
+				request.getRequestDispatcher("/FrmRegistrarProveedor.jsp").forward(request, response);
+				// salimos
+				break;
+			case "Eliminar":
+				System.out.println("Hola ");
+				// obtenemos el codigo
+				int codelim= Integer.parseInt(request.getParameter("id"));
+				// asignamos el codigo
+				tblprov.setIdproveedorcl2(codelim);
+				// invocamos al metodo a eliminar...
+				crudimp.EliminarProveedor(tblprov);
+				List<TblProveedorcl2> listado=crudimp.ListadoProveedor();
+				// enviamos hacia la vista
+				request.setAttribute("listado", listado);
+				// redireccionamos
+				request.getRequestDispatcher("/MenuPrincipal.jsp").forward(request, response);
+				break;
+			case "Listar":
+				// redireccionamos hacia la vista(.jsp)
+				request.getRequestDispatcher("/MenuPrincipal.jsp").forward(request, response);
+				// salimos
+				break;
+			} // fin del switch.....
+		} // fin de la condicion..
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		// recuperamos los datos del formulario...
+		String idproveedor = request.getParameter("idprov");
+		String nomprov = request.getParameter("nomprov");
+		String rucprov = request.getParameter("rucprov");
+		String rsocialprov = request.getParameter("rsocialprov");
+		String emailprov = request.getParameter("emailprov");
+		Date fecha = new Date();
+		Date fechasql = new Date(fecha.getTime());
+		// hacer las respectivas instancias....
+		TblProveedorcl2 tblprov = new TblProveedorcl2();
+		ClassProveedorImp climp = new ClassProveedorImp();
+		// asignamos los valores
+		tblprov.setNomproveecl2(nomprov);
+		tblprov.setRucproveecl2(rucprov);
+		tblprov.setRsocialproveecl2(rsocialprov);
+		tblprov.setEmailproveecl2(emailprov);
+		tblprov.setFeingproveecl2(fechasql);
+		// aplicamos una condicion...
+		if (idproveedor!= null) {
+			int idprov = Integer.parseInt(idproveedor);
+			// luego asignamos el codigo a actualizar...
+			tblprov.setIdproveedorcl2(idprov);
+			// invocamos el metodo a actualizar...
+			climp.ActualizarProveedor(tblprov);
+			// invocamos el metodo registrar.
+		} else {
+			climp.RegistrarProveedor(tblprov);
+		}
+		// actualizamos el listado...
+		List<TblProveedorcl2> listado = climp.ListadoProveedor();
+		// enviamos hacia la vista
+		request.setAttribute("listado", listado);
+		// redireccionamos
+		request.getRequestDispatcher("/MenuPrincipal.jsp").forward(request, response);
+	} // fin del metodo dopost...
+}
