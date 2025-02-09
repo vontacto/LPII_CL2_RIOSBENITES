@@ -1,0 +1,15 @@
+package Interfaces;
+
+import java.util.List;
+
+import model.TblProveedorcl2;
+
+public interface IProveedor {
+
+	void RegistrarProveedor(Proveedorcl2 tblproveedor);
+	void ActualizarProducto(Proveedorcl2 tblproveedor);
+	void EliminarProducto(Proveedorcl2 tblproveedor);
+	List<Proveedorcl2> ListadoProveedor();
+	Proveedorcl2 BuscarProducto(Proveedorcl2 tblproveedor);
+	
+}

@@ -1,0 +1,13 @@
+package Interfaces;
+
+import model.TblProveedorcl2;
+
+public interface IProveedor {
+
+	void RegistrarProveedor(TblProveedorcl2 tblproveedor);
+	void ActualizarProducto(TblProveedorcl2 tblproveedor);
+	void EliminarProducto(TblProveedorcl2 tblproveedor);
+	List<TblPProveedorcl2> ListadoProveedor();
+	TblProveedorcl2 BuscarProducto(TblProveedorcl2 tblproveedor);
+	
+}
