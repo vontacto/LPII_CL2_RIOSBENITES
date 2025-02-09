@@ -1,0 +1,1 @@
+INDEX VERSION 1.127+C:\Users\merb0\OneDrive\Documents\Cibertec\4to ciclo\LENGUAJE DE PROGRAMACION II\T2\.metadata\.plugins\org.eclipse.jdt.core
