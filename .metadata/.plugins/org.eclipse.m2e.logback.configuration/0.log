@@ -609,3 +609,4 @@ Caused by: org.eclipse.aether.transfer.ArtifactNotFoundException: Could not find
 2025-02-09 05:28:45,061 [Worker-277] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
 2025-02-09 05:28:45,062 [Worker-277] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
 2025-02-09 05:28:45,063 [Worker-277] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1252 actually) to copy filtered resources, i.e. build is platform dependent!
+2025-02-09 05:28:45,063 [Worker-277] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\merb0\OneDrive\Documents\Cibertec\4to ciclo\LENGUAJE DE PROGRAMACION II\T2\LPII_CL2_RIOSBENITESMARIO\src\test\resources
